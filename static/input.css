@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+[x-cloak] {
+    display: none !important;
+}
+
+.remove-arrow::-webkit-inner-spin-button,
+.remove-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.remove-arrow {
+    -moz-appearance: textfield;
+}
+
+@theme {
+    --color-black: #171717;
+    --color-gray: #262626;
+    --color-white: #E5E5E5;
+}

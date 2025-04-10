@@ -1,0 +1,7 @@
+{
+  "watch": ["./**/*.go", "./**/*.templ"],
+  "ext": "go,templ",
+  "exec": "templ generate && npm run build && go run main.go",
+    "signal": "SIGKILL"
+}
+

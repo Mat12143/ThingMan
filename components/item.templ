@@ -1,0 +1,26 @@
+package components
+
+templ ItemComponent() {
+<div class="w-full p-3 flex flex-row text-center rounded-md bg-black text-white gap-10 border-gray border-4"
+    x-data="{ item: item }"
+    x-init="$watch('item', async (value) => {const newItem = await update(value); newItem != null ? (error = false, items = items.map(ai => ai.id === item.id ? newItem : ai)): error = true})">
+    <div class="w-full h-full flex flex-row items-center justify-center lg:gap-10 gap-5">
+        <div class="w-1/2 max-w-1/2 flex justify-center items-center truncate">
+            <h1 class="text-white" x-text="item.name"></h1>
+        </div>
+        <div class="flex flex-row lg:gap-5 gap-2 justify-center items-center lg:w-1/4">
+            <button class="bg-gray p-3 rounded-md text-white"
+                @click="item.quantity === 1 ? (confirm = true, deleteItem = item) : item.quantity--">-1</button>
+            <p class="w-10 flex justify-center items-center text-center p-2 rounded-md border-2 border-gray"
+                x-text="item.quantity"></p>
+            <button class="bg-gray p-3 rounded-md text-white" @click="item.quantity += 1">+1</button>
+        </div>
+        <div class="flex items-center justify-center">
+            <button class="bg-gray p-3 rounded-md text-white flex flex-row"
+                @click="item.location = item.location == 1 ? 0 : 1">
+                Move
+            </button>
+        </div>
+    </div>
+</div>
+}

@@ -1,0 +1,70 @@
+package components
+
+import "fmt"
+
+templ Column(location string) {
+<div class="w-full lg:h-full flex flex-colitems-center p-2">
+    <div class="w-full h-full flex flex-col items-center gap-2">
+        <h1 class="text-white text-2xl pb-3">
+            if location == "0" {
+            🏠 Home
+            } else {
+            🎓 University
+            }
+        </h1>
+        <template x-for={ fmt.Sprintf(`(item, i) in items.filter(i=> i.location == %s).sort((a, b) => {return new
+            Date(b.modifiedAt) - new Date(a.modifiedAt)})`, location) }
+            :key="item.id"
+            >
+            @ItemComponent()
+        </template>
+        <div class="w-full flex justify-center items-center rounded-md border-gray border-dashed border-4 h-20">
+            <form @submit.prevent={ fmt.Sprintf("const res=await addNew(%s); res==null ? error=true : items.push(res)",
+                location) } action="/add" method="post" name={ "form-" + location } x-cloak
+                class="w-full h-full lg:p-0 p-2">
+                <div class="flex w-full h-full flex-row items-center gap-10">
+                    <input type="text" placeholder="Name" id="name" name="name" required
+                        class="w-1/2 p-2 rounded-md border-gray bg-black text-white text-center" />
+                    <input hidden id="location" name="location" value={ location } class="w-auto" />
+                    <input class="bg-black rounded-md border-gray text-white p-2 w-1/4 text-center remove-arrow"
+                        type="number" min="0" max="100" placeholder="Quantity" id="quantity" name="quantity" required />
+                    <button class="bg-blakc border-4 border-gray p-3 text-white rounded-md" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    async function addNew(id) {
+        const form = document.forms["form-" + id];
+        const name = form.name.value;
+        const location = form.location.value;
+        const quantity = form.quantity.value;
+
+        data = {
+            name: name,
+            location: Number(location),
+            quantity: Number(quantity),
+        };
+
+        try {
+            const resp = await fetch("/add", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (resp.ok) {
+                form.reset();
+                return (await resp.json());
+            }
+        } catch (e) {
+            console.error("Cannot add a new item. Try to refresh");
+            return nil;
+        }
+
+    }
+</script>
+}

@@ -1,0 +1,67 @@
+package components
+
+import (
+"encoding/json"
+"fmt"
+"github.com/Mat12143/thingMan/db"
+)
+
+templ Index(items []db.Item) {
+{{ itemsBytes, _ := json.Marshal(items) }}
+{{ itemsJson := string(itemsBytes) }}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ThingsMan</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <script defer src="/static/alpine.js"></script>
+    <!-- definition of the function update for item -->
+    <script>
+        async function update(item) {
+            let resp = null;
+
+            try {
+                resp = await fetch("/update/" + item.id, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(item)
+                });
+
+            } catch (e) {
+                console.error(e);
+                return null;
+            }
+
+            if (!resp.ok) {
+                console.error(resp);
+                return null;
+            };
+            return (await resp.json());
+        }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="bg-black" x-data={ fmt.Sprintf("{ error: false, confirm: false, deleteItem: null, items: %s}", itemsJson)
+    }>
+    @ConfirmPopup()
+    @ErrorPopup()
+    <div class="flex flex-col w-screen h-screen">
+        <div class="w-full flex justify-center items-center pt-5">
+            <h1 class="text-white text-2xl font-semibold">📦 ThingMan 👨</h1>
+        </div>
+        <div class="h-full w-full grid lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 gaps-5 lg:p-20 p-1 lg:pt-20 pt-5">
+            @Column("0")
+            @Column("1")
+        </div>
+        <!--<div class="w-full flex justify-center items-center">
+            <p class="text-gray hover:text-white">Created by <a href="mat12143.github.io">Mat12143</a></p>
+        </div>-->
+    </div>
+</body>
+
+</html>
+}
