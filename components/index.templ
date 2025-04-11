@@ -39,7 +39,15 @@ templ Index(items []db.Item) {
                 console.error(resp);
                 return null;
             };
-            return (await resp.json());
+            try {
+                // When the item is updated
+                const json = await resp.json();
+                return json;
+            } catch (e) {
+                // If the item is deleted
+                return {};
+            }
+
         }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -57,9 +65,6 @@ templ Index(items []db.Item) {
             @Column("0")
             @Column("1")
         </div>
-        <!--<div class="w-full flex justify-center items-center">
-            <p class="text-gray hover:text-white">Created by <a href="mat12143.github.io">Mat12143</a></p>
-        </div>-->
     </div>
 </body>
 
