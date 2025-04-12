@@ -19,8 +19,10 @@ func UpdateItem(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, "Invalid id provided")
 	}
 
-	var item db.Item
-	dbItem := db.Istance.Where("id = ?", id).First(&item)
+	var selectedItem db.Item
+	var updatedItem db.Item
+
+	dbItem := db.Istance.Where("id = ?", id).First(&selectedItem)
 
 	if dbItem.Error != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, "Invalid id provided")
@@ -31,18 +33,24 @@ func UpdateItem(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, "Invalid JSON provided")
 	}
 
-	err = json.Unmarshal(data, &item)
+	err = json.Unmarshal(data, &updatedItem)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, "Invalid JSON provided")
 	}
 
-	if item.Quantity <= 0 {
-		db.Istance.Delete(&db.Item{}, item.Id)
+	if updatedItem.Quantity <= 0 {
+		db.Istance.Delete(&db.Item{}, updatedItem.Id)
 		return nil
 	}
 
-	item.ModifiedAt = time.Now().Unix()
-	db.Istance.Save(&item)
+	if updatedItem.Location != selectedItem.Location {
+		updatedItem.ModifiedAt = time.Now().Unix()
+	}
 
-	return c.JSON(http.StatusOK, item)
+	updatedItem.Id = selectedItem.Id
+	updatedItem.CreatedAt = selectedItem.CreatedAt
+
+	db.Istance.Save(&updatedItem)
+
+	return c.JSON(http.StatusOK, updatedItem)
 }

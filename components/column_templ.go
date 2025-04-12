@@ -31,7 +31,7 @@ func Column(location string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full lg:h-full flex flex-colitems-center p-2\"><div class=\"w-full h-full flex flex-col items-center gap-2\"><h1 class=\"text-white text-2xl pb-3\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full lg:h-full flex flex-colitems-center p-2\"><div class=\"w-full h-full flex flex-col items-center gap-3\"><h1 class=\"text-white text-2xl pb-3\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -46,15 +46,15 @@ func Column(location string) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</h1><template x-for=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</h1><div x-data=\"{ handleMove: (item, position) =&gt; {console.log(item, position)} }\" class=\"w-full gap-3 flex flex-col\"><template x-for=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf(`(item, i) in items.filter(i=> i.location == %s).sort((a, b) => {return new
-            Date(b.modifiedAt) - new Date(a.modifiedAt)})`, location))
+                Date(b.modifiedAt) - new Date(a.modifiedAt)})`, location))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/column.templ`, Line: 16, Col: 69}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/column.templ`, Line: 18, Col: 73}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -68,7 +68,7 @@ func Column(location string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</template><div class=\"w-full flex justify-center items-center rounded-md border-gray border-dashed border-4 h-20\"><form @submit.prevent=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</template></div><div class=\"w-full flex justify-center items-center rounded-md border-gray border-dashed border-4 h-20\"><form @submit.prevent=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -76,7 +76,7 @@ func Column(location string) templ.Component {
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("const res=await addNew(%s); res==null ? error=true : items.push(res)",
 			location))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/column.templ`, Line: 23, Col: 25}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/column.templ`, Line: 26, Col: 25}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -89,26 +89,13 @@ func Column(location string) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs("form-" + location)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/column.templ`, Line: 23, Col: 81}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/column.templ`, Line: 26, Col: 81}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "\" x-cloak class=\"w-full h-full lg:p-0 p-2\"><div class=\"flex w-full h-full flex-row items-center gap-10\"><input type=\"text\" placeholder=\"Name\" id=\"name\" name=\"name\" required class=\"w-1/2 p-2 rounded-md border-gray bg-black text-white text-center\"> <input hidden id=\"location\" name=\"location\" value=\"")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(location)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/column.templ`, Line: 28, Col: 80}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "\" class=\"w-auto\"> <input class=\"bg-black rounded-md border-gray text-white p-2 w-1/4 text-center remove-arrow\" type=\"number\" min=\"0\" max=\"100\" placeholder=\"Quantity\" id=\"quantity\" name=\"quantity\" required> <button class=\"bg-blakc border-4 border-gray p-3 text-white rounded-md\" type=\"submit\">Add</button></div></form></div></div></div><script>\n    async function addNew(id) {\n        const form = document.forms[\"form-\" + id];\n        const name = form.name.value;\n        const location = form.location.value;\n        const quantity = form.quantity.value;\n\n        data = {\n            name: name,\n            location: Number(location),\n            quantity: Number(quantity),\n        };\n\n        try {\n            const resp = await fetch(\"/add\", {\n                method: \"POST\",\n                headers: {\n                    'Content-Type': 'application/json',\n                },\n                body: JSON.stringify(data),\n            });\n\n            if (resp.ok) {\n                form.reset();\n                return (await resp.json());\n            }\n        } catch (e) {\n            console.error(\"Cannot add a new item. Try to refresh\");\n            return nil;\n        }\n\n    }\n</script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "\" x-cloak class=\"w-full h-full lg:p-0 p-3\"><div class=\"flex w-full h-full flex-row items-center gap-10 p-3\"><input type=\"text\" placeholder=\"Name\" id=\"name\" name=\"name\" required class=\"w-1/2 p-2 rounded-md border-gray bg-black text-white text-center focus:outline-none focus:border-gray focus:border-2\"> <input class=\"bg-black rounded-md border-gray text-white p-2 w-1/4 text-center remove-arrow focus:outline-none focus:border-gray focus:border-2\" type=\"number\" min=\"0\" max=\"100\" placeholder=\"Quantity\" id=\"quantity\" name=\"quantity\" required> <button class=\"bg-blakc border-2 border-gray p-3 text-white rounded-md\" type=\"submit\">Add</button></div></form></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

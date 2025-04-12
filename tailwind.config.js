@@ -1,12 +1,3 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["components/**/*.templ"],
-  purge: [],
-  theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
-};
+export const content = ["components/**/*.templ"];
+export const plugins = [require("@tailwindcss/forms")];

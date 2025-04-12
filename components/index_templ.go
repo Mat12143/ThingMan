@@ -37,14 +37,14 @@ func Index(items []db.Item) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		itemsBytes, _ := json.Marshal(items)
 		itemsJson := string(itemsBytes)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html><head><title>ThingsMan</title><link rel=\"stylesheet\" type=\"text/css\" href=\"/static/style.css\"><script defer src=\"/static/alpine.js\"></script><!-- definition of the function update for item --><script>\n        async function update(item) {\n            let resp = null;\n\n            try {\n                resp = await fetch(\"/update/\" + item.id, {\n                    method: \"POST\",\n                    headers: {\n                        'Content-Type': 'application/json',\n                    },\n                    body: JSON.stringify(item)\n                });\n\n            } catch (e) {\n                console.error(e);\n                return null;\n            }\n\n            if (!resp.ok) {\n                console.error(resp);\n                return null;\n            };\n            try {\n                // When the item is updated\n                const json = await resp.json();\n                return json;\n            } catch (e) {\n                // If the item is deleted\n                return {};\n            }\n\n        }\n    </script><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"></head><body class=\"bg-black\" x-data=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html><head><title>ThingsMan</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" type=\"text/css\" href=\"/static/style.css\"><script src=\"/static/logic.js\"></script><script defer src=\"/static/alpine.js\"></script></head><body class=\"bg-black\" x-data=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("{ error: false, confirm: false, deleteItem: null, items: %s}", itemsJson))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/index.templ`, Line: 56, Col: 118}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/index.templ`, Line: 23, Col: 118}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -62,7 +62,7 @@ func Index(items []db.Item) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"flex flex-col w-screen h-screen\"><div class=\"w-full flex justify-center items-center pt-5\"><h1 class=\"text-white text-2xl font-semibold\">📦 ThingMan 👨</h1></div><div class=\"h-full w-full grid lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 gaps-5 lg:p-20 p-1 lg:pt-20 pt-5\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"flex flex-col w-screen h-screen\"><div class=\"w-full flex flex-col justify-center items-center pt-5 gap-3\"><h1 class=\"text-white text-3xl font-semibold\">📦 ThingMan 👨</h1><a href=\"https://github.com/Mat12143/ThingMan\" class=\"text-white hover:underline\">Created by Mat12143</a></div><div class=\"h-full w-full grid lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 gaps-5 lg:p-20 p-1 lg:pt-20 pt-5\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

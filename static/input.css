@@ -19,3 +19,7 @@
     --color-gray: #262626;
     --color-white: #E5E5E5;
 }
+
+button {
+    cursor: pointer;
+}

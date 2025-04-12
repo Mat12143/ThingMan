@@ -14,43 +14,10 @@ templ Index(items []db.Item) {
 
 <head>
     <title>ThingsMan</title>
-    <link rel="stylesheet" type="text/css" href="/static/style.css" />
-    <script defer src="/static/alpine.js"></script>
-    <!-- definition of the function update for item -->
-    <script>
-        async function update(item) {
-            let resp = null;
-
-            try {
-                resp = await fetch("/update/" + item.id, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(item)
-                });
-
-            } catch (e) {
-                console.error(e);
-                return null;
-            }
-
-            if (!resp.ok) {
-                console.error(resp);
-                return null;
-            };
-            try {
-                // When the item is updated
-                const json = await resp.json();
-                return json;
-            } catch (e) {
-                // If the item is deleted
-                return {};
-            }
-
-        }
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <script src="/static/logic.js"></script>
+    <script defer src="/static/alpine.js"></script>
 </head>
 
 <body class="bg-black" x-data={ fmt.Sprintf("{ error: false, confirm: false, deleteItem: null, items: %s}", itemsJson)
@@ -58,8 +25,9 @@ templ Index(items []db.Item) {
     @ConfirmPopup()
     @ErrorPopup()
     <div class="flex flex-col w-screen h-screen">
-        <div class="w-full flex justify-center items-center pt-5">
-            <h1 class="text-white text-2xl font-semibold">📦 ThingMan 👨</h1>
+        <div class="w-full flex flex-col justify-center items-center pt-5 gap-3">
+            <h1 class="text-white text-3xl font-semibold">📦 ThingMan 👨</h1>
+            <a href="https://github.com/Mat12143/ThingMan" class="text-white hover:underline">Created by Mat12143</a>
         </div>
         <div class="h-full w-full grid lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 gaps-5 lg:p-20 p-1 lg:pt-20 pt-5">
             @Column("0")

@@ -29,7 +29,7 @@ func ErrorPopup() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<template x-if=\"error\"><div class=\"w-full h-full flex justify-center items-center text-center z-10 fixed text-white bg-black\"><div class=\"flex flex-col justify-center items-center text-center gap-5\"><h1 class=\"text-xl font-bold\">Error</h1><p>An Error Occured while updating the item</p><button class=\"p-3 rounded-md bg-white text-black\" @click=\"window.location.reload()\">Reload Page</button></div></div></template>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<template x-if=\"error\"><div class=\"fixed z-10 w-full h-full backdrop-blur-md flex justify-center items-center\"><div class=\"justify-center items-center text-center text-white bg-black\"><div class=\"flex flex-col justify-center items-center text-center gap-5\"><h1 class=\"text-3xl font-bold\">🫤 An Error occurred</h1><p>Error while connecting to the server<br>Maybe a refresh will solve the issue?</p><button class=\"p-3 rounded-md bg-white text-black\" @click=\"window.location.reload()\">Reload Page</button></div></div></div></template>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

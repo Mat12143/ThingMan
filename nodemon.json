@@ -1,7 +1,7 @@
 {
-  "watch": ["./components/**/*.templ", "./**/*.go"],
-  "ext": "go,templ",
-  "exec": "templ generate && npm run build && go run main.go",
+    "watch": ["./components/**/*.templ", "./**/*.go"],
+    "ext": "go,templ",
+    "exec": "templ generate && npm run build && go run main.go",
     "signal": "SIGKILL",
     "ignore": "./components/**/*.go"
 }

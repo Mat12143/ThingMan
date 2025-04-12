@@ -25,6 +25,7 @@ WORKDIR /app
 
 COPY --from=tailwindBuild /build/static/style.css ./static/style.css
 COPY --from=build /build/static/alpine.js ./static/alpine.js
+COPY --from=build /build/static/logic.js ./static/logic.js
 
 COPY --from=build /build/thingman .
 
